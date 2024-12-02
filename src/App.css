@@ -2,4 +2,27 @@ body {
   min-height: 100dvh;
   background-color: #25183b;
   color: #eae8ec;
+  margin-top: 3rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.movies-form {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.movie-query-input {
+  min-width: 18.75rem;
 }
