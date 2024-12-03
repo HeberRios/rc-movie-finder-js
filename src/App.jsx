@@ -1,18 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import queryResults from './mocks/query-with-results.json';
 
 function App() {
   const movies = queryResults.Search;
-  // we use the useState hook to save the query state
   const [query, setQuery] = useState('');
-  // also the error state for the form validation
   const [error, setError] = useState(null);
+  // here we are using the useRef hook to save a value that will persist between renders
+  const userFirstInput = useRef(true);
 
-  // here we use the useEffect to have a react controlled way of validate the form
-  // so when de dependency changes (query), this code will be executed
   useEffect(
     function () {
+      // here we are checking if the user has modified the query input,
+      // the userFirstInput will be true at the first render of the app but
+      // if the query changes, will be changed to false and will start to validate
+      // the entered value, so if the query value is equal to '' then the user has
+      // not entered a value to search but if is not an empty string the user has
+      // already entered a value to search so will be validated in the next if statements
+      if (userFirstInput.current) {
+        userFirstInput.current = query === '';
+        console.log(userFirstInput.current);
+        return;
+      }
+
       if (query === '') {
         setError('Please enter a movie title to search!');
         return;
@@ -34,7 +44,6 @@ function App() {
     [query]
   );
 
-  // here we prevent the default behavior of the form submit
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -42,12 +51,10 @@ function App() {
   function handleQueryChange(e) {
     const newQuery = e.target.value;
 
-    // here if the user enter a blank space in the input, it will be ignored
     if (newQuery.startsWith(' ')) {
       return;
     }
 
-    // if the input is not a blank space, we set the new query value
     setQuery(newQuery);
   }
 
@@ -75,8 +82,6 @@ function App() {
           </button>
         </form>
 
-        {/* here we use conditional rendering to show or not show the span 
-        with the error message depending on the error value */}
         {error && <span className='input-error-msg'>{error}</span>}
       </header>
 
