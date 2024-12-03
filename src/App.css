@@ -13,7 +13,7 @@ body {
 header {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 h1 {
@@ -39,6 +39,17 @@ ul {
 
 .movie-query-input {
   min-width: 18.75rem;
+  padding: 0.25rem 0.75rem;
+}
+
+.submit-btn {
+  padding: 0.25rem 1rem;
+}
+
+.input-error-msg {
+  color: #f34d4d;
+  font-size: 0.75rem;
+  text-align: center;
 }
 
 main {
