@@ -4,12 +4,12 @@ function MoviesList({ movies }) {
       {movies.length > 0 &&
         movies.map(function (movie) {
           return (
-            <li className='movie' key={movie.imdbID}>
-              <h3>{movie.Title}</h3>
+            <li className='movie' key={movie.id}>
+              <h3>{movie.title}</h3>
               <span>
-                <time dateTime={movie.Year}>{movie.Year}</time>
+                <time dateTime={movie.year}>{movie.year}</time>
               </span>
-              <img src={movie.Poster} alt={movie.Title} />
+              <img src={movie.poster} alt={movie.title} />
             </li>
           );
         })}

@@ -9,6 +9,19 @@ function App() {
   const [error, setError] = useState(null);
   const userFirstInput = useRef(true);
 
+  // here we process the array we get from the api, to not depend on
+  // how the api give us the data, so here we return an array with
+  // every item in the array being the same but with its properties
+  // renamed
+  const mappedMovies = movies?.map(function (movie) {
+    return {
+      id: movie.imdbID,
+      title: movie.Title,
+      year: movie.Year,
+      poster: movie.Poster,
+    };
+  });
+
   useEffect(
     function () {
       if (userFirstInput.current) {
@@ -78,7 +91,7 @@ function App() {
       <main className='container'>
         <h2>Results</h2>
 
-        <Movies movies={movies}></Movies>
+        <Movies movies={mappedMovies}></Movies>
       </main>
     </div>
   );
