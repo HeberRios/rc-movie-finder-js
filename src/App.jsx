@@ -1,13 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import queryResults from './mocks/query-with-results.json';
 import { Movies } from './components/Movies';
+import { useQuery } from './hooks/useQuery';
 
 function App() {
   const movies = queryResults.Search;
-  const [query, setQuery] = useState('');
-  const [error, setError] = useState(null);
-  const userFirstInput = useRef(true);
+  const { query, setQuery, error } = useQuery();
 
   // here we process the array we get from the api, to not depend on
   // how the api give us the data, so here we return an array with
@@ -21,34 +19,6 @@ function App() {
       poster: movie.Poster,
     };
   });
-
-  useEffect(
-    function () {
-      if (userFirstInput.current) {
-        userFirstInput.current = query === '';
-        return;
-      }
-
-      if (query === '') {
-        setError('Please enter a movie title to search!');
-        return;
-      }
-
-      const queryStart = query.slice(0, 1);
-      if (!isNaN(parseFloat(queryStart))) {
-        setError('The movie search cannot start with a number');
-        return;
-      }
-
-      if (query.length < 3) {
-        setError('The movie search cannot less than 3 characters');
-        return;
-      }
-
-      setError(null);
-    },
-    [query]
-  );
 
   function handleSubmit(e) {
     e.preventDefault();
