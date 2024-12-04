@@ -1,24 +1,11 @@
 import './App.css';
-import queryResults from './mocks/query-with-results.json';
 import { Movies } from './components/Movies';
+import { useMovies } from './hooks/useMovies';
 import { useQuery } from './hooks/useQuery';
 
 function App() {
-  const movies = queryResults.Search;
   const { query, setQuery, error } = useQuery();
-
-  // here we process the array we get from the api, to not depend on
-  // how the api give us the data, so here we return an array with
-  // every item in the array being the same but with its properties
-  // renamed
-  const mappedMovies = movies?.map(function (movie) {
-    return {
-      id: movie.imdbID,
-      title: movie.Title,
-      year: movie.Year,
-      poster: movie.Poster,
-    };
-  });
+  const { movies } = useMovies();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -61,7 +48,7 @@ function App() {
       <main className='container'>
         <h2>Results</h2>
 
-        <Movies movies={mappedMovies}></Movies>
+        <Movies movies={movies}></Movies>
       </main>
     </div>
   );
