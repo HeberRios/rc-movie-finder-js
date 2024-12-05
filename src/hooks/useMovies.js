@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { searchMovies } from '../services/movies';
 
 export function useMovies({ query }) {
   const [movies, setMovies] = useState([]);
+  // we use the useRef hook to save a value that will persist between renders
+  // this value being the previous search of the user
+  const previousSearch = useRef(query);
 
   const getMovies = async ({ query }) => {
-    // we remove the function to map the movies that we get from the API,
-    // to have that logic not in the custom hook but in the movies.js service
-    // this because the hook we are building do not need to process the movies
-    // just obtain them from the searchMovies function and then set the new state for
-    // the movies variable
+    // when the previousSearch is equal to the new one, no search will be made
+    if (previousSearch.current === query) {
+      console.log('Search denied, equal current query than the previous one');
+      return;
+    }
+
+    previousSearch.current = query;
     const newMovies = await searchMovies({ query });
     setMovies(newMovies);
   };

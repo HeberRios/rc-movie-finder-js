@@ -9,7 +9,6 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // here we use the query state value to search the movies, at the submit event
     getMovies({ query });
   }
 
@@ -21,9 +20,6 @@ function App() {
     }
 
     setQuery(newQuery);
-    // here we pass the newQuery value to the getMovies function, this because if
-    // we use the value of the query state we will get the previous value instead
-    // of the current value
     getMovies({ query: newQuery });
   }
 
