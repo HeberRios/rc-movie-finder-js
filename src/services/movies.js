@@ -1,20 +1,20 @@
 const API_KEY = '4287ad07';
 
-export async function searchMovies({ search }) {
-  if (search === '') {
+export async function searchMovies({ query }) {
+  if (query === '') {
     return;
   }
 
   try {
     const response = await fetch(
-      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`
+      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`
     );
 
-    const data = response.json();
+    const data = await response.json();
 
     const movies = data.Search;
 
-    const mappedMovies = movies.map(function (movie) {
+    const mappedMovies = movies?.map(function (movie) {
       return {
         id: movie.imdbID,
         title: movie.Title,

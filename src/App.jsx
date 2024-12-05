@@ -1,14 +1,16 @@
 import './App.css';
-import { Movies } from './components/Movies';
-import { useMovies } from './hooks/useMovies';
-import { useQuery } from './hooks/useQuery';
+import { Movies } from './components/Movies.jsx';
+import { useMovies } from './hooks/useMovies.js';
+import { useQuery } from './hooks/useQuery.js';
 
 function App() {
   const { query, setQuery, error } = useQuery();
-  const { movies } = useMovies();
+  const { movies, getMovies } = useMovies({ query });
 
   function handleSubmit(e) {
     e.preventDefault();
+    // here we use the query state value to search the movies, at the submit event
+    getMovies({ query });
   }
 
   function handleQueryChange(e) {
@@ -19,6 +21,10 @@ function App() {
     }
 
     setQuery(newQuery);
+    // here we pass the newQuery value to the getMovies function, this because if
+    // we use the value of the query state we will get the previous value instead
+    // of the current value
+    getMovies({ query: newQuery });
   }
 
   return (
