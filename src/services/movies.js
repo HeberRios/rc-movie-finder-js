@@ -13,6 +13,7 @@ export async function searchMovies({ query }) {
     const data = await response.json();
 
     const movies = data.Search;
+    console.log('search being made');
 
     const mappedMovies = movies?.map(function (movie) {
       return {

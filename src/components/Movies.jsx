@@ -18,7 +18,9 @@ function MoviesList({ movies }) {
 }
 
 function NoResults() {
-  return <span>No results for the specified search</span>;
+  return (
+    <span className='no-results'>No results for the specified search</span>
+  );
 }
 
 export function Movies({ movies }) {

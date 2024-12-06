@@ -64,6 +64,10 @@ main > h2 {
   text-align: center;
 }
 
+.no-results {
+  text-align: center;
+}
+
 .query-results-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
