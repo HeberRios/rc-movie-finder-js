@@ -64,7 +64,8 @@ main > h2 {
   text-align: center;
 }
 
-.no-results {
+.no-results,
+.loading-text {
   text-align: center;
 }
 

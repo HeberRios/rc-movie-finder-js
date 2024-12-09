@@ -7,17 +7,10 @@ import debounce from 'just-debounce-it';
 
 function App() {
   const { query, setQuery, error } = useQuery();
-  const { movies, getMovies } = useMovies({ query });
+  const { movies, getMovies, loading } = useMovies({ query });
 
-  // we use the same function expression as the documentation of just-debounce-it
-  // but also we use useCallback to only generate the function one time and no generate
-  // a new debounce EVERY render of the App component
   const debouncedMovies = useCallback(
-    // this query parameter will be provided when the debouncedMovies is called
-    // as is the only argument that we will pass, the newQuery (at the call) will be
-    // our query parameter and will be used in the getMovies argument as an object with
-    // the query property
-    debounce(function (query) { // <-- this query parameter
+    debounce(function (query) {
       getMovies({ query });
     }, 350),
     []
@@ -66,7 +59,14 @@ function App() {
       <main className='container'>
         <h2>Results</h2>
 
-        <Movies movies={movies}></Movies>
+        {/* here with a ternary operator we are checking if the loading is active, if yes
+        a span with the text: "loading movies..." will appear but if the loading is done
+        then the Movies component will be displayed*/}
+        {loading ? (
+          <span className='loading-text'>Loading movies...</span>
+        ) : (
+          <Movies movies={movies}></Movies>
+        )}
       </main>
     </div>
   );
