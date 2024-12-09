@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import './App.css';
 import { Movies } from './components/Movies.jsx';
 import { useMovies } from './hooks/useMovies.js';
@@ -6,8 +6,9 @@ import { useQuery } from './hooks/useQuery.js';
 import debounce from 'just-debounce-it';
 
 function App() {
+  const [sort, setSort] = useState(false);
   const { query, setQuery, error } = useQuery();
-  const { movies, getMovies, loading } = useMovies({ query });
+  const { movies, getMovies, loading } = useMovies({ query, sort });
 
   const debouncedMovies = useCallback(
     debounce(function (query) {
@@ -32,6 +33,10 @@ function App() {
     debouncedMovies(newQuery);
   }
 
+  function handleSort() {
+    setSort(!sort);
+  }
+
   return (
     <div className='page'>
       <header className='container'>
@@ -39,6 +44,10 @@ function App() {
 
         <form onSubmit={handleSubmit} className='movies-form'>
           <input
+            style={{
+              border: ' 2px solid transparent',
+              borderColor: error ? 'red' : 'transparent',
+            }}
             onChange={handleQueryChange}
             type='text'
             name='query'
@@ -59,9 +68,21 @@ function App() {
       <main className='container'>
         <h2>Results</h2>
 
-        {/* here with a ternary operator we are checking if the loading is active, if yes
-        a span with the text: "loading movies..." will appear but if the loading is done
-        then the Movies component will be displayed*/}
+        <div className='sort-container'>
+          <p>Sort movies by date:</p>
+          {/* we create a checkbox input to act as a switch for our sorting,
+          when we check the input the sort value will change (handleSort function), 
+          initially has a value of false but when we check the box will change 
+          to true and vice versa */}
+          <input
+            type='checkbox'
+            name='sort'
+            id='sort'
+            checked={sort}
+            onChange={handleSort}
+          />
+        </div>
+
         {loading ? (
           <span className='loading-text'>Loading movies...</span>
         ) : (

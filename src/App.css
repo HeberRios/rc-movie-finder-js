@@ -2,8 +2,7 @@ body {
   min-height: 100dvh;
   background-color: #25183b;
   color: #eae8ec;
-  margin-top: 3rem;
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
 .container {
@@ -67,6 +66,13 @@ main > h2 {
 .no-results,
 .loading-text {
   text-align: center;
+}
+
+.sort-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .query-results-container {
