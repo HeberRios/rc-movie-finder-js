@@ -70,10 +70,7 @@ function App() {
 
         <div className='sort-container'>
           <p>Sort movies by date:</p>
-          {/* we create a checkbox input to act as a switch for our sorting,
-          when we check the input the sort value will change (handleSort function), 
-          initially has a value of false but when we check the box will change 
-          to true and vice versa */}
+
           <input
             type='checkbox'
             name='sort'

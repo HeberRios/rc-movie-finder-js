@@ -1,5 +1,7 @@
 # Crea una aplicación para buscar películas
 
+Este proyecto viene del curso de React de  Miguel Ángel Durán  en [Youtube](https://www.youtube.com/watch?v=GOEiMwDJ3lc&list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29&index=7)
+
 API a usar: - https://www.omdbapi.com/
 Consigue la API Key en la propia página web registrando tu email.
 
